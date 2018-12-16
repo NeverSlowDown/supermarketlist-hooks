@@ -84,3 +84,69 @@ export const ListItemDelete = styled.button`
     fill: #bebebe;
   }
 `;
+
+export const AddItemContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+  width: 100%;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+  margin: 20px 0;  
+`;
+
+export const AddItemTitle = styled.div`
+  flex: 1 1 100%;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: center;
+`;
+export const AddItemInput = styled.input`
+  display: flex;
+  border: 1px solid #cbcbcb;
+  border-radius: 5px;
+  min-height: 50px;
+  flex: 1 1 100%;
+  padding: 10px;
+  box-sizing: border-box;
+`;
+export const AddItemCancel = styled.div`
+  display: flex;
+  border: 1px solid #cbcbcb;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  color: #404040;
+  flex: 1;
+  max-width: 125px;
+  border-radius: 5px;
+`;
+export const AddItemConfirm = styled.div`
+  display: flex;
+  transition: 0.3s ease;
+  background: ${props => (props.active ? '#1da5fc' : '#cbcbcb')};
+  border: none;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  flex: 1;
+  max-width: 125px;
+  border-radius: 5px;
+`;
+
+export const AddItemButtons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 1 100%;
+  margin-top: 20px;
+`;
