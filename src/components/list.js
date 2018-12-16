@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const ListContainer = styled.ul`
   display: flex;
-  background: rgba(0,0,0,0.1);
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -55,7 +54,6 @@ const ListItemsContainer = styled.ul`
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  background: rgba(0,0,0,0.1);
 `;
 
 const ListItem = styled.li`
@@ -70,6 +68,10 @@ const ListItem = styled.li`
   align-items: center;
   &:not(:first-of-type){
     margin-top: 15px;
+  };
+  transition: 0.3s ease;
+  &:hover{
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
   }
 `;
 
