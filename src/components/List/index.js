@@ -41,7 +41,7 @@ const List = () => {
   };
 
   const handlerDelete = (value) => {
-    setBasketItem(basketItem.filter(item => item.id != value.id));
+    setBasketItem(basketItem.filter(item => item.id !== parseInt(value.id, 10)));
   };
 
   const handleModal = () => {
@@ -111,5 +111,6 @@ const List = () => {
     </ListContainer>
   );
 };
+
 
 export default List;

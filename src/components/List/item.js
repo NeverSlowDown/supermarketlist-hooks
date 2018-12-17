@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   ListItem,
   ListItemDelete,
@@ -16,6 +17,17 @@ const Item = ({ name, handlerDelete }) => {
       </ListItemDelete>
     </ListItem>
   );
-}
+};
+
+Item.propTypes = {
+  name: PropTypes.string,
+  handlerDelete: PropTypes.func,
+};
+
+Item.defaultProps = {
+  name: 'beer',
+  handlerDelete: null,
+};
+
 
 export default Item;
