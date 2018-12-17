@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ListItem from './item';
 import {
   ListContainer,
@@ -17,16 +17,31 @@ import {
 
 const List = () => {
   const [count, setCount] = useState(0);
-  const [basketItem, setBasketItem] = useState([
-    {
-      name: 'beer',
-      id: count
-    },
-    {
-      name: 'hola',
-      id: count
-    },
-  ]);
+  const [basketItem, setBasketItem] = useState([]);
+  const [valid, setValid] = useState(false);
+  const inputEl = useRef(null);
+
+  const handlerAddValidation = (e) => {
+    setValid(e.target.value !== '');
+  };
+
+  const handlerAddItem = () => {
+    setCount(count + 1);
+    const newItem = {
+      id: count,
+      name: inputEl.current.value,
+    };
+    valid && setBasketItem([...basketItem, newItem]);
+    inputEl.current.value = '';
+    setValid(false);
+    console.log(basketItem);
+  };
+
+  const handlerDelete = (e) => {
+    setCount(count - 1);
+    setBasketItem(basketItem.filter(item => item.name !== e.target.value));
+  }
+
 
   return (
     <ListContainer>
@@ -43,8 +58,9 @@ const List = () => {
       <ListItemsContainer>
         {Object.keys(basketItem).map(key => (
           <ListItem
-            key={basketItem[key].id}
+            key={basketItem[key].name}
             name={basketItem[key].name}
+            handlerDelete={handlerDelete}
           />
         ))}
 
@@ -59,12 +75,12 @@ const List = () => {
         <AddItemTitle>
           Add Item
         </AddItemTitle>
-        <AddItemInput type="text" />
+        <AddItemInput type="text" ref={inputEl} onChange={handlerAddValidation} />
         <AddItemButtons>
           <AddItemCancel>
             Cancel
           </AddItemCancel>
-          <AddItemConfirm>
+          <AddItemConfirm onClick={handlerAddItem} active={valid}>
             Add
           </AddItemConfirm>
         </AddItemButtons>

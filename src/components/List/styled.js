@@ -80,6 +80,7 @@ export const ListItemDelete = styled.button`
   width: 28px;
   height: 28px;
   padding: 0;
+  cursor: pointer;
   svg{
     fill: #bebebe;
   }
@@ -129,13 +130,13 @@ export const AddItemConfirm = styled.div`
   display: flex;
   transition: 0.3s ease;
   background: ${props => (props.active ? '#1da5fc' : '#cbcbcb')};
+  cursor: ${props => (props.active ? 'pointer' : 'not-allowed')};
   border: none;
   min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  cursor: pointer;
   color: white;
   flex: 1;
   max-width: 125px;
