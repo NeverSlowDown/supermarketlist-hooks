@@ -40,8 +40,8 @@ const List = () => {
     inputEl.current.value = '';
   };
 
-  const handlerDelete = (e) => {
-    setBasketItem(basketItem.filter(item => item.id != e.target.value));
+  const handlerDelete = (value) => {
+    setBasketItem(basketItem.filter(item => item.id != value.id));
   };
 
   const handleModal = () => {
@@ -71,7 +71,7 @@ const List = () => {
                 key={basketItem[key].id}
                 number={basketItem[key].id}
                 name={basketItem[key].name}
-                handlerDelete={handlerDelete}
+                handlerDelete={() => handlerDelete(basketItem[key])}
               />
             ))
             : (
