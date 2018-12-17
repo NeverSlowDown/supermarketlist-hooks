@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const ListContainer = styled.ul`
   display: flex;
@@ -55,6 +55,17 @@ export const ListItemsContainer = styled.ul`
   flex-basis: 100%;
 `;
 
+const addItem = keyframes`
+  0%{
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
+
 export const ListItem = styled.li`
   display: flex;
   flex-basis: 100%;
@@ -71,7 +82,8 @@ export const ListItem = styled.li`
   transition: 0.3s ease;
   &:hover{
     box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
-  }
+  };
+  animation: ${addItem} 0.5s ease;
 `;
 
 export const ListItemDelete = styled.button`
@@ -86,6 +98,17 @@ export const ListItemDelete = styled.button`
   }
 `;
 
+const popUp = keyframes`
+  0%{
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
 export const AddItemContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -95,7 +118,8 @@ export const AddItemContainer = styled.div`
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
   margin: 20px 0;
-  max-width: 600px;
+  max-width: 400px;
+  animation: ${popUp} 0.5s ease;
 `;
 
 export const AddItemModal = styled.div`
@@ -104,7 +128,7 @@ export const AddItemModal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(243, 243, 243, 0.82);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,6 +206,5 @@ export const EmptyCartTitle = styled.h2`
   font-size: 24px;
   font-weight: bold;
   color: #929292;
-  margin: 20px 0;
+  margin: 20px 0;   
 `;
-
