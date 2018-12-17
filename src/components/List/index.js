@@ -38,9 +38,9 @@ const List = () => {
   };
 
   const handlerDelete = (e) => {
-    setCount(count - 1);
-    setBasketItem(basketItem.filter(item => item.name !== e.target.value));
+    setBasketItem(basketItem.filter(item => item.id != e.target.value));
   }
+
 
 
   return (
@@ -58,7 +58,8 @@ const List = () => {
       <ListItemsContainer>
         {Object.keys(basketItem).map(key => (
           <ListItem
-            key={basketItem[key].name}
+            key={basketItem[key].id}
+            number={basketItem[key].id}
             name={basketItem[key].name}
             handlerDelete={handlerDelete}
           />
