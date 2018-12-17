@@ -13,6 +13,7 @@ import {
   AddItemTitle,
   AddItemConfirm,
   AddItemButtons,
+  AddItemModal,
 } from './styled';
 
 const List = () => {
@@ -20,6 +21,7 @@ const List = () => {
   const [basketItem, setBasketItem] = useState([]);
   const [valid, setValid] = useState(false);
   const inputEl = useRef(null);
+  const [modal, setModal] = useState(false);
 
   const handlerAddValidation = (e) => {
     setValid(e.target.value !== '');
@@ -33,15 +35,19 @@ const List = () => {
     };
     valid && setBasketItem([...basketItem, newItem]);
     inputEl.current.value = '';
-    setValid(false);
-    console.log(basketItem);
   };
 
   const handlerDelete = (e) => {
     setBasketItem(basketItem.filter(item => item.id != e.target.value));
-  }
+  };
 
+  const handleModal = () => {
+    return modal ? setModal(false) : setModal(true);
+  };
 
+  useEffect(() => {
+    setValid(false);
+  }, [modal, basketItem]);
 
   return (
     <ListContainer>
@@ -51,7 +57,6 @@ const List = () => {
         </ListTitle>
         <ListSubtitle>
           {basketItem.length} items
-          {/* 3 items */}
         </ListSubtitle>
       </ListHeader>
 
@@ -67,26 +72,28 @@ const List = () => {
 
       </ListItemsContainer>
 
-      <ListButton>
+      <ListButton onClick={handleModal}>
         Add item
       </ListButton>
 
-
-      <AddItemContainer>
-        <AddItemTitle>
-          Add Item
-        </AddItemTitle>
-        <AddItemInput type="text" ref={inputEl} onChange={handlerAddValidation} />
-        <AddItemButtons>
-          <AddItemCancel>
-            Cancel
-          </AddItemCancel>
-          <AddItemConfirm onClick={handlerAddItem} active={valid}>
-            Add
-          </AddItemConfirm>
-        </AddItemButtons>
-        
-      </AddItemContainer>
+      {modal && (
+        <AddItemModal>
+          <AddItemContainer>
+            <AddItemTitle>
+              Add Item
+            </AddItemTitle>
+            <AddItemInput type="text" ref={inputEl} onChange={handlerAddValidation} />
+            <AddItemButtons>
+              <AddItemCancel onClick={handleModal}>
+                Cancel
+              </AddItemCancel>
+              <AddItemConfirm onClick={handlerAddItem} active={valid}>
+                Add
+              </AddItemConfirm>
+            </AddItemButtons>
+          </AddItemContainer>
+        </AddItemModal>
+      )}
     </ListContainer>
   );
 };
