@@ -14,6 +14,9 @@ import {
   AddItemConfirm,
   AddItemButtons,
   AddItemModal,
+  EmptyCart,
+  EmptyCartContainer,
+  EmptyCartTitle,
 } from './styled';
 
 const List = () => {
@@ -61,14 +64,25 @@ const List = () => {
       </ListHeader>
 
       <ListItemsContainer>
-        {Object.keys(basketItem).map(key => (
-          <ListItem
-            key={basketItem[key].id}
-            number={basketItem[key].id}
-            name={basketItem[key].name}
-            handlerDelete={handlerDelete}
-          />
-        ))}
+        {
+          basketItem.length > 0
+            ? Object.keys(basketItem).map(key => (
+              <ListItem
+                key={basketItem[key].id}
+                number={basketItem[key].id}
+                name={basketItem[key].name}
+                handlerDelete={handlerDelete}
+              />
+            ))
+            : (
+              <EmptyCartContainer>
+                <EmptyCartTitle>
+                  Your cart is empty, try adding new items!
+                </EmptyCartTitle>
+                <EmptyCart alt="empty" src="https://cdn.dribbble.com/users/2046015/screenshots/4591856/first_white_girl_drbl.gif" />
+              </EmptyCartContainer>
+            )
+        }
 
       </ListItemsContainer>
 

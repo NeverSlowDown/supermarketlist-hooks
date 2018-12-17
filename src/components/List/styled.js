@@ -164,3 +164,24 @@ export const AddItemButtons = styled.div`
   flex: 1 1 100%;
   margin-top: 20px;
 `;
+
+export const EmptyCart = styled.img`
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+`;
+
+export const EmptyCartContainer = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const EmptyCartTitle = styled.h2`
+  font-size: 24px;
+  font-weight: bold;
+  color: #929292;
+  margin: 20px 0;
+`;
+
