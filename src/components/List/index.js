@@ -31,6 +31,7 @@ const List = () => {
   useEffect(() => {
     myApi.getListItems().then((myList) => {
       setBasketItem(myList);
+      setCount(myList.length);
     });
   }, []);
 
@@ -39,9 +40,8 @@ const List = () => {
   };
 
   const handlerAddItem = () => {
-    setCount(count + 1);
     const newItem = {
-      id: count,
+      id: count + 1,
       name: inputEl.current.value,
     };
     return valid && myApi.addItem(newItem).then((item) => {
@@ -64,6 +64,10 @@ const List = () => {
     setValid(false);
   }, [modal, basketItem]);
 
+  useEffect(() => {
+    setCount(count + basketItem.length);
+  }, [basketItem]);
+
   return (
     <ListContainer>
       <ListHeader>
@@ -81,7 +85,6 @@ const List = () => {
             ? Object.keys(basketItem).map(key => (
               <ListItem
                 key={basketItem[key].id}
-                number={basketItem[key].id}
                 name={basketItem[key].name}
                 handlerDelete={() => handlerDelete(basketItem[key])}
               />
