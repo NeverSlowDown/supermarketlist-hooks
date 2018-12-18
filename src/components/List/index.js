@@ -51,7 +51,7 @@ const List = () => {
   };
 
   const handleModal = () => {
-    return modal ? setModal(false) : setModal(true);
+    return setModal(!modal);
   };
 
   useEffect(() => {
@@ -92,9 +92,7 @@ const List = () => {
               </EmptyCartContainer>
             )
         }
-
       </ListItemsContainer>
-
       <ListButton onClick={handleModal}>
         Add item
       </ListButton>
