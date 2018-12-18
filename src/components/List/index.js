@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ListItem from './item';
+import Modal from './modal';
 import * as myApi from '../../api';
 import {
   ListContainer,
@@ -8,13 +9,6 @@ import {
   ListSubtitle,
   ListButton,
   ListItemsContainer,
-  AddItemContainer,
-  AddItemInput,
-  AddItemCancel,
-  AddItemTitle,
-  AddItemConfirm,
-  AddItemButtons,
-  AddItemModal,
   EmptyCart,
   EmptyCartContainer,
   EmptyCartTitle,
@@ -35,11 +29,11 @@ const List = () => {
     });
   }, []);
 
-  const handlerAddValidation = (e) => {
+  const handleAddValidation = (e) => {
     setValid(e.target.value !== '');
   };
 
-  const handlerAddItem = () => {
+  const handleAddItem = () => {
     const newItem = {
       id: count + 1,
       name: inputEl.current.value,
@@ -50,7 +44,7 @@ const List = () => {
     });
   };
 
-  const handlerDelete = (value) => {
+  const handleDelete = (value) => {
     return myApi.removeItem(value).then((item) => {
       setBasketItem(basketItem.filter(i => i.id !== parseInt(item.id, 10)));
     });
@@ -86,7 +80,7 @@ const List = () => {
               <ListItem
                 key={basketItem[key].id}
                 name={basketItem[key].name}
-                handlerDelete={() => handlerDelete(basketItem[key])}
+                handleDelete={() => handleDelete(basketItem[key])}
               />
             ))
             : (
@@ -106,22 +100,13 @@ const List = () => {
       </ListButton>
 
       {modal && (
-        <AddItemModal>
-          <AddItemContainer>
-            <AddItemTitle>
-              Add Item
-            </AddItemTitle>
-            <AddItemInput type="text" ref={inputEl} onChange={handlerAddValidation} />
-            <AddItemButtons>
-              <AddItemCancel onClick={handleModal}>
-                Cancel
-              </AddItemCancel>
-              <AddItemConfirm onClick={handlerAddItem} active={valid}>
-                Add
-              </AddItemConfirm>
-            </AddItemButtons>
-          </AddItemContainer>
-        </AddItemModal>
+        <Modal
+          inputEl={inputEl}
+          handleAddValidation={handleAddValidation}
+          handleModal={handleModal}
+          handleAddItem={handleAddItem}
+          valid={valid}
+        />
       )}
     </ListContainer>
   );
