@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ListItem from './item';
+import * as myApi from '../../api';
 import {
   ListContainer,
   ListHeader,
@@ -26,6 +27,13 @@ const List = () => {
   const inputEl = useRef(null);
   const [modal, setModal] = useState(false);
 
+  // this only happens the first time
+  useEffect(() => {
+    myApi.getListItems().then((myList) => {
+      setBasketItem(myList);
+    });
+  }, []);
+
   const handlerAddValidation = (e) => {
     setValid(e.target.value !== '');
   };
@@ -36,12 +44,16 @@ const List = () => {
       id: count,
       name: inputEl.current.value,
     };
-    valid && setBasketItem([...basketItem, newItem]);
-    inputEl.current.value = '';
+    return valid && myApi.addItem(newItem).then((item) => {
+      setBasketItem([...basketItem, item]);
+      inputEl.current.value = '';
+    });
   };
 
   const handlerDelete = (value) => {
-    setBasketItem(basketItem.filter(item => item.id !== parseInt(value.id, 10)));
+    return myApi.removeItem(value).then((item) => {
+      setBasketItem(basketItem.filter(i => i.id !== parseInt(item.id, 10)));
+    });
   };
 
   const handleModal = () => {

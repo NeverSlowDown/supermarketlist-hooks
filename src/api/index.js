@@ -1,5 +1,5 @@
 const getList = () => {
-  return JSON.parse(localStorage.getItem('listItems'));
+  return JSON.parse(localStorage.getItem('listItems')) || [];
 };
 
 export const getListItems = () => {
@@ -20,11 +20,11 @@ export const addItem = (item) => {
   });
 };
 
-export const removeItem = (itemId) => {
-  const item = getList().find(i => i.id === itemId);
+export const removeItem = (value) => {
+  const item = getList().find(i => i.id === value.id);
   return new Promise((resolve) => {
     setTimeout(() => {
-      const newList = getList().filter(i => i.id !== itemId);
+      const newList = getList().filter(i => i.id !== value.id);
       localStorage.setItem('listItems', JSON.stringify(newList));
       resolve(item);
     }, 2500);
